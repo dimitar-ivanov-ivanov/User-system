@@ -32,6 +32,19 @@ public class Runner {
                     "Ivanov"
             );
 
+            User ivan = new User(
+                    "iv!n",
+                    "Ivan##1231a#@",
+                    "ivan.i.ivanov@abv.bg",
+                    new byte[]{1, 2, 3, 4},
+                    LocalDateTime.now(),
+                    LocalDateTime.now(),
+                    25,
+                    false,
+                    "Ivan",
+                    "Ivanov"
+            );
+
             Country bulgaria = new Country("Bulgaria");
 
             Town haskovo = new Town(
@@ -46,10 +59,14 @@ public class Runner {
 
             dimitar.setBornTown(haskovo);
             dimitar.setLivingTown(sofia);
+            ivan.setLivingTown(haskovo);
+            ivan.setBornTown(sofia);
+
+            dimitar.getFriends().add(ivan);
 
             countryService.registerCountry(bulgaria);
             townService.registerTowns(List.of(haskovo, sofia));
-            userService.registerUser(dimitar);
+            userService.registerUsers(List.of(dimitar, ivan));
         };
     }
 }

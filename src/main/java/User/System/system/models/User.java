@@ -14,6 +14,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Arrays;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name = "user")
 @Table(
@@ -109,8 +111,16 @@ public class User {
     @JoinColumn(name = "living_town_id", referencedColumnName = "town_id")
     private Town livingTown;
 
-    public User() {
+    @ManyToMany
+    @JoinTable(
+            name = "user_friends",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "friend_id")}
+    )
+    private Set<User> friends;
 
+    public User() {
+        this.friends = new HashSet<>();
     }
 
     public User(@Size(min = 4, max = 30, message = TextConstants.USERNAME_INCORRECT_LENGTH) String username,
@@ -133,6 +143,7 @@ public class User {
         this.isDeleted = isDeleted;
         this.firstName = firstName;
         this.lastName = lastName;
+        this.friends = new HashSet<>();
     }
 
     public long getId() {
@@ -221,6 +232,38 @@ public class User {
 
     public void setLivingTown(Town livingTown) {
         this.livingTown = livingTown;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public void setFullName(String fullName) {
+        this.fullName = fullName;
+    }
+
+    public Set<User> getFriends() {
+        return friends;
+    }
+
+    public void setFriends(Set<User> friends) {
+        this.friends = friends;
     }
 
     @Override
