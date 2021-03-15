@@ -20,14 +20,16 @@ public class Runner {
     CommandLineRunner commandLineRunner(UserService userService, TownService townService, CountryService countryService) {
         return args -> {
             User dimitar = new User(
-                    "dimitar",
+                    "d1mn",
                     "Dimitar$1234",
                     "dimitar.i.ivanov@abv.bg",
                     new byte[]{1, 2, 3, 4},
                     LocalDateTime.now(),
                     LocalDateTime.now(),
                     22,
-                    false
+                    false,
+                    "Dimitar",
+                    "Ivanov"
             );
 
             Country bulgaria = new Country("Bulgaria");

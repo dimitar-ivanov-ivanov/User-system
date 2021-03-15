@@ -54,4 +54,12 @@ public class TextConstants {
 
     public static final String COUNTRY_NAME_INCORRECT =
             "Town name should be between 1 and 50 characters.";
+
+    public static final String FIRST_NAME_INCORRECT =
+            "Town name should be between 2 and 25 characters.";
+
+
+    public static final String LAST_NAME_INCORRECT =
+            "Town name should be between 2 and 25 characters.";
+
 }

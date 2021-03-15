@@ -3,6 +3,7 @@ package User.System.system.models;
 import User.System.system.annotations.email.Email;
 import User.System.system.annotations.password.Password;
 import User.System.system.constants.TextConstants;
+import org.hibernate.annotations.Formula;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -82,6 +83,24 @@ public class User {
     )
     private boolean isDeleted;
 
+    @Column(
+            name = "first_name",
+            nullable = false
+    )
+    @Size(min = 2, max = 25, message = TextConstants.FIRST_NAME_INCORRECT)
+    private String firstName;
+
+    @Column(
+            name = "last_name",
+            nullable = false
+    )
+    @Size(min = 2, max = 25, message = TextConstants.LAST_NAME_INCORRECT)
+    private String lastName;
+
+    @Transient
+    @Formula(value = "concat(first_name,' ', last_name)")
+    private String fullName;
+
     @ManyToOne(optional = false)
     @JoinColumn(name = "born_town_id", referencedColumnName = "town_id")
     private Town bornTown;
@@ -94,16 +113,16 @@ public class User {
 
     }
 
-    public User(@Size(min = 4, max = 30,
-            message = TextConstants.USERNAME_INCORRECT_LENGTH) String username,
+    public User(@Size(min = 4, max = 30, message = TextConstants.USERNAME_INCORRECT_LENGTH) String username,
                 String password,
                 String email,
                 @Size(max = 1024 * 1024) byte[] profilePicture,
                 LocalDateTime registeredOn,
                 LocalDateTime lastTimeLoggedIn,
-                @Min(value = 1, message = TextConstants.AGE_TOO_LOW)
-                @Max(value = 120, message = TextConstants.AGE_TOO_HIGH) int age,
-                boolean isDeleted) {
+                @Min(value = 1, message = TextConstants.AGE_TOO_LOW) @Max(value = 120, message = TextConstants.AGE_TOO_HIGH) int age,
+                boolean isDeleted,
+                @Size(min = 2, max = 25, message = TextConstants.FIRST_NAME_INCORRECT) String firstName,
+                @Size(min = 2, max = 25, message = TextConstants.LAST_NAME_INCORRECT) String lastName) {
         this.username = username;
         this.password = password;
         this.email = email;
@@ -112,6 +131,8 @@ public class User {
         this.lastTimeLoggedIn = lastTimeLoggedIn;
         this.age = age;
         this.isDeleted = isDeleted;
+        this.firstName = firstName;
+        this.lastName = lastName;
     }
 
     public long getId() {
