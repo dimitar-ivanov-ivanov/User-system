@@ -48,4 +48,10 @@ public class TextConstants {
 
     public static final String AGE_TOO_HIGH =
             "Age must be lower than 120.";
+
+    public static final String TOWN_NAME_INCORRECT =
+            "Town name should be between 1 and 50 characters.";
+
+    public static final String COUNTRY_NAME_INCORRECT =
+            "Town name should be between 1 and 50 characters.";
 }

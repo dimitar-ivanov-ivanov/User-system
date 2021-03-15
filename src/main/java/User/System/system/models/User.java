@@ -82,6 +82,14 @@ public class User {
     )
     private boolean isDeleted;
 
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "born_town_id", referencedColumnName = "town_id")
+    private Town bornTown;
+
+    @ManyToOne()
+    @JoinColumn(name = "living_town_id", referencedColumnName = "town_id")
+    private Town livingTown;
+
     public User() {
 
     }
@@ -176,6 +184,22 @@ public class User {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+
+    public Town getBornTown() {
+        return bornTown;
+    }
+
+    public void setBornTown(Town bornTown) {
+        this.bornTown = bornTown;
+    }
+
+    public Town getLivingTown() {
+        return livingTown;
+    }
+
+    public void setLivingTown(Town livingTown) {
+        this.livingTown = livingTown;
     }
 
     @Override
