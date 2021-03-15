@@ -1,10 +1,17 @@
 package User.System.system.models;
 
-import User.System.system.annotations.Password;
+import User.System.system.annotations.email.Email;
+import User.System.system.annotations.password.Password;
 import User.System.system.constants.TextConstants;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 @Entity(name = "user")
 @Table(
@@ -46,9 +53,127 @@ public class User {
             containsSpecialSymbol = true)
     private String password;
 
+    @Column(nullable = false)
+    @Email
     private String email;
 
     @Lob
     @Size(max = 1024 * 1024)
     private byte[] profilePicture;
+
+    @Column(
+            name = "registered_on"
+    )
+    private LocalDateTime registeredOn;
+
+    @Column(
+            name = "last_time_logged_in"
+    )
+    private LocalDateTime lastTimeLoggedIn;
+
+
+    @Min(value = 1, message = TextConstants.AGE_TOO_LOW)
+    @Max(value = 120, message = TextConstants.AGE_TOO_HIGH)
+    private int age;
+
+    @Column(
+            name = "is_deleted"
+    )
+    private boolean isDeleted;
+
+    public User() {
+
+    }
+
+    public User(@Size(min = 4, max = 30,
+            message = TextConstants.USERNAME_INCORRECT_LENGTH) String username,
+                String password,
+                String email,
+                @Size(max = 1024 * 1024) byte[] profilePicture,
+                LocalDateTime registeredOn,
+                LocalDateTime lastTimeLoggedIn,
+                @Min(value = 1, message = TextConstants.AGE_TOO_LOW)
+                @Max(value = 120, message = TextConstants.AGE_TOO_HIGH) int age,
+                boolean isDeleted) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        this.profilePicture = profilePicture;
+        this.registeredOn = registeredOn;
+        this.lastTimeLoggedIn = lastTimeLoggedIn;
+        this.age = age;
+        this.isDeleted = isDeleted;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public byte[] getProfilePicture() {
+        return profilePicture;
+    }
+
+    public void setProfilePicture(byte[] profilePicture) {
+        this.profilePicture = profilePicture;
+    }
+
+    public LocalDateTime getRegisteredOn() {
+        return registeredOn;
+    }
+
+    public void setRegisteredOn(LocalDateTime registeredOn) {
+        this.registeredOn = registeredOn;
+    }
+
+    public LocalDateTime getLastTimeLoggedIn() {
+        return lastTimeLoggedIn;
+    }
+
+    public void setLastTimeLoggedIn(LocalDateTime lastTimeLoggedIn) {
+        this.lastTimeLoggedIn = lastTimeLoggedIn;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
+    }
+
+    public boolean isDeleted() {
+        return isDeleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        isDeleted = deleted;
+    }
 }

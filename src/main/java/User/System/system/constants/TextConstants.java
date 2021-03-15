@@ -28,4 +28,24 @@ public class TextConstants {
     public static final String PASSWORD_SHOULD_CONTAIN_SPECIAL_SYMBOL
             = "Password should contain at least one special symbol.";
 
+    public static final String INVALID_EMAIL_FORMAT =
+            "Invalid email format.";
+
+    public static final String EMAIL_CANNOT_BE_NULL =
+            "Email cannot be null.";
+
+    public static final String EMAIL_USERNAME_TOO_SHORT =
+            "Username must be at least a single character.";
+
+    public static final String EMAIL_USERNAME_TOO_LONG =
+            "Username should be lower than 50 characters.";
+
+    public static final String EMAIL_HOSTNAME_TOO_LONG =
+            "Hostname should be lower than 50 characters.";
+
+    public static final String AGE_TOO_LOW =
+            "Age must be at least 1.";
+
+    public static final String AGE_TOO_HIGH =
+            "Age must be lower than 120.";
 }
