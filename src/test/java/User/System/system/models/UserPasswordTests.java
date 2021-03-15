@@ -13,7 +13,6 @@ import java.util.Locale;
 import java.util.Set;
 
 import org.junit.Assert;
-import org.junit.Before;
 
 public class UserPasswordTests {
 
@@ -53,7 +52,6 @@ public class UserPasswordTests {
 
     @Test
     public void passwordIsTooLong() {
-        User user = new User();
         user.setPassword(LONG_PASSWORD);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -72,7 +70,6 @@ public class UserPasswordTests {
 
     @Test
     public void passwordDoesNotContainDigit() {
-        User user = new User();
         user.setPassword(NO_DIGIT_PASSWORD);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -91,7 +88,6 @@ public class UserPasswordTests {
 
     @Test
     public void passwordDoesNotContainLowercase() {
-        User user = new User();
         user.setPassword(NO_LOWERCASE_PASSWORD);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -110,7 +106,6 @@ public class UserPasswordTests {
 
     @Test
     public void passwordDoesNotContainUppercase() {
-        User user = new User();
         user.setPassword(NO_UPPERCASE_PASSWORD);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -129,7 +124,6 @@ public class UserPasswordTests {
 
     @Test
     public void passwordDoesNotContainSpecialSymbol() {
-        User user = new User();
         user.setPassword(NO_SPECIAL_SYMBOL_PASSWORD);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
@@ -148,7 +142,6 @@ public class UserPasswordTests {
 
     @Test
     public void passwordIsValid() {
-        User user = new User();
         user.setPassword(VALID_PASSWORD);
         ValidatorFactory factory = Validation.buildDefaultValidatorFactory();
         Validator validator = factory.getValidator();
