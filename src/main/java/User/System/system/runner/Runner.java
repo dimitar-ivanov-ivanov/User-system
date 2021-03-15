@@ -17,7 +17,7 @@ public class Runner {
         return args -> {
             User dimitar = new User(
                     "dimitar",
-                    "dimitar1234",
+                    "Dimitar1234",
                     "dimitar.i.ivanov@abv.bg",
                     new byte[]{1, 2, 3, 4},
                     LocalDateTime.now(),
