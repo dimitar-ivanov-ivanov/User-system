@@ -6,6 +6,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+import java.util.List;
 import java.time.LocalDateTime;
 
 @Configuration
@@ -25,7 +26,11 @@ public class Runner {
                     false
             );
 
-            userService.registerUser(dimitar);
+
+
+            userService.registerUser(
+                    dimitar
+            );
         };
     }
 }

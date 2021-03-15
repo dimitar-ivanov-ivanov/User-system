@@ -11,6 +11,7 @@ import javax.validation.constraints.Min;
 import javax.validation.constraints.Size;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.Date;
 
 @Entity(name = "user")
@@ -117,7 +118,7 @@ public class User {
         return username;
     }
 
-    public void setUsername(String username) {
+    public void setUsername(final String username) {
         this.username = username;
     }
 
@@ -175,5 +176,20 @@ public class User {
 
     public void setDeleted(boolean deleted) {
         isDeleted = deleted;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", email='" + email + '\'' +
+                ", profilePicture=" + Arrays.toString(profilePicture) +
+                ", registeredOn=" + registeredOn +
+                ", lastTimeLoggedIn=" + lastTimeLoggedIn +
+                ", age=" + age +
+                ", isDeleted=" + isDeleted +
+                '}';
     }
 }
