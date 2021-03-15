@@ -119,8 +119,16 @@ public class User {
     )
     private Set<User> friends;
 
+    @ManyToMany
+    @JoinTable(
+            name = "user_albums",
+            joinColumns = {@JoinColumn(name = "user_id")},
+            inverseJoinColumns = {@JoinColumn(name = "album_id")})
+    private Set<Album> albums;
+
     public User() {
         this.friends = new HashSet<>();
+        this.albums = new HashSet<>();
     }
 
     public User(@Size(min = 4, max = 30, message = TextConstants.USERNAME_INCORRECT_LENGTH) String username,
@@ -144,6 +152,7 @@ public class User {
         this.firstName = firstName;
         this.lastName = lastName;
         this.friends = new HashSet<>();
+        this.albums = new HashSet<>();
     }
 
     public long getId() {
@@ -264,6 +273,14 @@ public class User {
 
     public void setFriends(Set<User> friends) {
         this.friends = friends;
+    }
+
+    public Set<Album> getAlbums() {
+        return albums;
+    }
+
+    public void setAlbums(Set<Album> albums) {
+        this.albums = albums;
     }
 
     @Override

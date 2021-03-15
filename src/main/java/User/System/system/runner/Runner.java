@@ -1,11 +1,8 @@
 package User.System.system.runner;
 
-import User.System.system.models.Country;
-import User.System.system.models.Town;
-import User.System.system.models.User;
-import User.System.system.services.interfaces.CountryService;
-import User.System.system.services.interfaces.TownService;
-import User.System.system.services.interfaces.UserService;
+import User.System.system.models.*;
+import User.System.system.services.interfaces.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -16,8 +13,23 @@ import java.time.LocalDateTime;
 @Configuration
 public class Runner {
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private TownService townService;
+
+    @Autowired
+    private CountryService countryService;
+
+    @Autowired
+    private PictureService pictureService;
+
+    @Autowired
+    private AlbumService albumService;
+
     @Bean
-    CommandLineRunner commandLineRunner(UserService userService, TownService townService, CountryService countryService) {
+    CommandLineRunner commandLineRunner() {
         return args -> {
             User dimitar = new User(
                     "d1mn",
@@ -57,15 +69,32 @@ public class Runner {
                     bulgaria
             );
 
+            Picture picture = new Picture(
+                    "a",
+                    "b",
+                    "c"
+            );
+
+            Album album = new Album(
+                    "a",
+                    "b",
+                    true
+            );
+
+            album.getPictures().add(picture);
+
             dimitar.setBornTown(haskovo);
             dimitar.setLivingTown(sofia);
             ivan.setLivingTown(haskovo);
             ivan.setBornTown(sofia);
 
             dimitar.getFriends().add(ivan);
+            dimitar.getAlbums().add(album);
 
             countryService.registerCountry(bulgaria);
             townService.registerTowns(List.of(haskovo, sofia));
+            pictureService.registerPicture(picture);
+            albumService.registerAlbum(album);
             userService.registerUsers(List.of(dimitar, ivan));
         };
     }
